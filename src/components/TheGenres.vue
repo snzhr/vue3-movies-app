@@ -1,5 +1,5 @@
 <template>
-      <div @click="$emit('getGenreMovie', genre.id)" class="flex-none rounded cursor-pointer p-2 mr-3 bg-gray-200 text-green-900">{{genre.name}}</div>
+      <div @click="$emit('getGenreMovie', genre.id)" class="flex-none rounded cursor-pointer p-2 mr-3 bg-gray-200 text-gray-800">{{genre.name}}</div>
 </template>
 
 <script>

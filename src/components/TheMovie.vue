@@ -24,7 +24,7 @@ props:{
 },
 data(){
     return {
-        preImg: 'https://image.tmdb.org/t/p/w500'+this.movie.backdrop_path,
+        preImg: 'https://image.tmdb.org/t/p/w500'+this.movie.poster_path,
    }
 
 },

@@ -1,21 +1,20 @@
 <template>
-<div class="home">
+<div class="home h-screen">
 <the-navbar></the-navbar>
 <div class="content">
-  <div class="flex sticky justify-between overflow-y-hidden sm:overflow-x-scroll
-  py-4">
+  <div class="flex mt-16 sticky justify-between overflow-y-hidden sm:overflow-x-scroll
+  pb-3">
 <the-genres v-for="genre in allGenres" 
 :key="genre.id" 
 :genre="genre"
-@get-genre-movie="getMoviesByGenre(genre.id)" 
-class="mt-10"></the-genres>
+@get-genre-movie="getMoviesByGenre(genre.id)"></the-genres>
   </div>
-<div  v-if="loaded" class=" flex justify-center items-center h-screen">
+<div  v-if="loaded" class="flex justify-center items-center h-screen">
 <the-loader></the-loader>
 </div>
 <div v-else class="movies">
 <the-movie-list  :movielist="movies"></the-movie-list>
-<the-pagination @get-movies="getNewMovies" :total-pages="totalPages" :total="total" :per-page="perPage" :current-page="currentPage"
+<the-pagination class="my-8" @get-movies="getNewMovies" :total-pages="totalPages" :total="total" :per-page="perPage" :current-page="currentPage"
       :has-more-pages="hasMorePages" @pagechanged="showMore"></the-pagination>
 </div>
 </div>

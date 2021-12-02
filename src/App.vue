@@ -1,8 +1,10 @@
 <template>
 <div class="main">
-  <the-navbar></the-navbar>
-<the-genres></the-genres>
-<the-movie-list :movielist="movies"></the-movie-list>
+<the-navbar></the-navbar>
+<div class="content">
+<the-genres class="mt-10"></the-genres>
+<the-movie-list  :movielist="movies"></the-movie-list>
+</div>
 </div>
 </template>
 
@@ -33,7 +35,7 @@ export default {
 </script>
 
 <style>
-#app{
+.content{
   padding: 1em;
 }
 </style>

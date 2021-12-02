@@ -5,11 +5,8 @@
 </template>
 
 <script>
-import TheLoader from '@/components/UI/TheLoader.vue';
 export default {
-components:{
-  TheLoader
-}
+
 }
 </script>
 

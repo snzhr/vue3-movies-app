@@ -39,7 +39,7 @@ export default {
         movies: [],
         allGenres: [],
         page: 1,
-        totalPages: 0,
+        totalPages: 20,
         total: 0,
         perPage: 20,
         currentPage: 1,
@@ -56,7 +56,6 @@ export default {
     .then(response => response.json())
     .then(data =>{
       this.movies = data.results;
-      this.totalPages = data.total_pages;
       // this.page = data.page;
       this.currentPage = data.page;
       this.total = data.total_results;
@@ -74,7 +73,6 @@ export default {
       const res = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=ru-Ru&page=${pageNum}`)
       const data = await res.json();
       this.movies = data.results;
-      console.log(data.results);
     },
     showMore(page) {
       this.page = page;
@@ -84,7 +82,6 @@ export default {
             const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=ru-RU&page=1&with_genres=${id}`)
             const data = await res.json();
             this.movies = data.results;
-            this.totalPages = data.total_pages;
             // this.page = data.page;
             this.currentPage = data.page;
             this.total = data.total_results;

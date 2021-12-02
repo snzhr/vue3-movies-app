@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<the-movie-list :movielist="movies"></the-movie-list>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TheMovieList from '@/components/TheMovieList'
+import api from './tmdbapi.js'
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components:{
+    TheMovieList
+  },
+  data(){
+    return {
+        movies: []
+    }
+  },
+  mounted(){
+    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=ru-Ru&page=1`)
+    .then(response => response.json())
+    .then(data =>{
+      this.movies = data.results;
+      console.log(data.results)
+    })
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app{
+  padding: 1em;
 }
 </style>

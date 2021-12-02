@@ -1,13 +1,19 @@
 <template>
+<div class="main">
+  <the-navbar></the-navbar>
+<the-genres></the-genres>
 <the-movie-list :movielist="movies"></the-movie-list>
+</div>
 </template>
 
 <script>
 import TheMovieList from '@/components/TheMovieList'
+import TheGenres from '@/components/TheGenres'
+import TheNavbar from '@/components/TheNavbar'
 import api from './tmdbapi.js'
 export default {
   components:{
-    TheMovieList
+    TheMovieList, TheGenres, TheNavbar
   },
   data(){
     return {
@@ -19,7 +25,7 @@ export default {
     .then(response => response.json())
     .then(data =>{
       this.movies = data.results;
-      console.log(data.results)
+      // console.log(data.results)
     })
   }
 

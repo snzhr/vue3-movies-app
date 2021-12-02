@@ -2,6 +2,7 @@
 node_modules
 /dist
 
+tmdbapi.js
 
 # local env files
 .env.local

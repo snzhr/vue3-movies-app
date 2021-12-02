@@ -4,7 +4,7 @@
   <img v-else class="w-full" src="http://www.elizabethlawchambers.com/wp-content/uploads/2019/02/Placeholder-500x500.jpg" alt="Sunset in the mountains">
   
   <div class="px-3 py-4">
-    <div class="font-bold text-xl mb-2">{{movie.title}}</div>
+    <div class="font-bold text-xl cursor-pointer mb-2" @click="$router.push(`/movies/${movie.id}`)">{{movie.title}}</div>
     <p class="text-gray-600 text-base">{{truncate}}</p>
   </div>
   <div class="px-6 py-4">

@@ -1,7 +1,5 @@
 <template>
-  <div class="main">
-    <router-view></router-view>
-  </div>
+  <h1>Hello World {{ $route.params.id}}</h1>
 </template>
 
 <script>

@@ -12,12 +12,12 @@ export default {
     },
 computed:{
     ratingColor(){
-        if (this.rating > 7.0) {
+        if (this.rating >= 7.0) {
             return {
                 'bg-green-500': true
             }
         }
-        else if(this.rating > 5.0){
+        else if(this.rating >= 5.0){
             return {
                 'bg-yellow-500': true
             }

@@ -1,6 +1,6 @@
 <template>
 <div class="home">
-<the-navbar @find="searchMovie"></the-navbar>
+<the-navbar></the-navbar>
 <div class="content ">
   <div class="flex mt-16 sticky justify-between overflow-y-hidden sm:overflow-x-scroll
   pb-3">
@@ -88,13 +88,13 @@ export default {
             this.total = data.total_results;
             
         },
-      async searchMovie(title){
-          const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-EN&query=${title}`)
-          const data = await res.json();
-          this.movies = data.results;
-          this.hidePagination = false;
-            // this.page = data.page;
-     }
+    //   async searchMovie(title){
+    //       const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-EN&query=${title}`)
+    //       const data = await res.json();
+    //       this.movies = data.results;
+    //       this.hidePagination = false;
+    //         // this.page = data.page;
+    //  }
   }
 
 }

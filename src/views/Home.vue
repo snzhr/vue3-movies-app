@@ -1,7 +1,7 @@
 <template>
 <div class="home h-screen">
 <the-navbar></the-navbar>
-<div class="content">
+<div class="content ">
   <div class="flex mt-16 sticky justify-between overflow-y-hidden sm:overflow-x-scroll
   pb-3">
 <the-genres v-for="genre in allGenres" 

@@ -13,21 +13,26 @@
     <button @click="getTrailer" class="bg-gray-500 p-2 rounded mt-4 flex items-center">Смотреть трейлер <fa icon="play-circle" class="ml-1"/></button>
     </div>    
 </div>  
+<div v-if="showTrailerBox" @click="showTrailerBox = false" class="trailer absolute p-4 max-h-screen bg-black bg-opacity-70 z-20 inset-0">
+<trailer-box :trailerId="trailer"></trailer-box>
+</div>
 </template>
 
 <script>
 import api from '@/tmdbapi.js'
 import TheNavbar from '@/components/TheNavbar'
 import TheLoader from '@/components/UI/TheLoader'
-
+import TrailerBox from '@/components/TrailerBox'
 export default {
   components:{
-    TheNavbar, TheLoader
+    TheNavbar, TheLoader, TrailerBox
   },
   data(){
     return{
          movie: {},
          preImg: '',
+         showTrailerBox: false,
+         trailer: ''
     }
   },
   computed:{
@@ -48,6 +53,8 @@ export default {
      const res = await fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}/videos?api_key=${api}&language=ru-RU`)
       const data = await res.json();
       console.log(data);
+      this.trailer = 'https://www.youtube.com/embed/'+data.results[0].key
+      this.showTrailerBox = true;
    }
  }  
 

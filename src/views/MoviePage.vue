@@ -3,16 +3,19 @@
 <div v-if="isMovieReady" class="flex justify-center items-center h-screen">
   <the-loader></the-loader>
 </div>
-<div v-else class="lg:flex px-4 pt-24 bg-gray-900 lg:h-screen">
+<div v-else>
+<div class="lg:flex px-4 pt-24 bg-gray-900 lg:h-screen">
     <div class="mb-4 mr-4 lg:w-2/4">
   <img class="rounded" :src="preImg" :alt="movie.title">
     </div>
     <div class="lg:w-2/4 ml-4 text-white">
       <h1 class="text-3xl">{{movie.title}}</h1>
     <p>{{movie.overview}}</p>
-    <button @click="getTrailer" class="bg-gray-500 p-2 rounded mt-4 flex items-center">Смотреть трейлер <fa icon="play-circle" class="ml-1"/></button>
+    <button @click="getTrailer" class="bg-gray-500 p-2 rounded mt-4 flex items-center">Watch trailer <fa icon="play-circle" class="ml-1"/></button>
     </div>    
-</div>  
+</div>
+<h1 class="">Hello</h1>
+</div>
 <div v-if="showTrailerBox" @click="showTrailerBox = false" class="trailer absolute p-4 max-h-screen bg-black bg-opacity-70 z-20 inset-0">
 <trailer-box :trailerId="trailer"></trailer-box>
 </div>
@@ -41,19 +44,27 @@ export default {
     }
   },
   mounted(){
-    fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=${api}&language=ru-RU`)
+    fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=${api}&language=en-EN`)
     .then(res=>res.json())
     .then(data=>{
       this.movie = data
     this.preImg = 'https://image.tmdb.org/t/p/w1280'+data.backdrop_path
-    })
+    });
+
+    fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}/credits?api_key=${api}&language=en-EN`)
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data); 
+    });
+
  },
  methods:{
    async getTrailer(){
-     const res = await fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}/videos?api_key=${api}&language=ru-RU`)
+     const res = await fetch(`https://api.themoviedb.org/3/movie/${this.$route.params.id}/videos?api_key=${api}&language=en-EN`)
       const data = await res.json();
-      console.log(data);
-      this.trailer = 'https://www.youtube.com/embed/'+data.results[0].key
+      if (data.results.length > 0) {
+        this.trailer = 'https://www.youtube.com/embed/'+data.results[0].key  
+      }
       this.showTrailerBox = true;
    }
  }  

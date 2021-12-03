@@ -1,6 +1,6 @@
 <template>
 <div class="home h-screen">
-<the-navbar></the-navbar>
+<the-navbar @find="searchMovie"></the-navbar>
 <div class="content ">
   <div class="flex mt-16 sticky justify-between overflow-y-hidden sm:overflow-x-scroll
   pb-3">
@@ -14,7 +14,7 @@
 </div>
 <div v-else class="movies">
 <the-movie-list  :movielist="movies"></the-movie-list>
-<the-pagination class="my-8" @get-movies="getNewMovies" :total-pages="totalPages" :total="total" :per-page="perPage" :current-page="currentPage"
+<the-pagination v-show="hidePagination" class="my-8" @get-movies="getNewMovies" :total-pages="totalPages" :total="total" :per-page="perPage" :current-page="currentPage"
       :has-more-pages="hasMorePages" @pagechanged="showMore"></the-pagination>
 </div>
 </div>
@@ -38,20 +38,22 @@ export default {
         movies: [],
         allGenres: [],
         page: 1,
-        totalPages: 20,
+        totalPages: 15,
         total: 0,
         perPage: 20,
         currentPage: 1,
         hasMorePages: true,
+        hidePagination: true
     }
   },
   computed:{
     loaded(){
       return this.movies.length == 0
-    }
+    },
+    
   },
   mounted(){
-      fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=ru-Ru&page=1`)
+      fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-EN&page=1`)
     .then(response => response.json())
     .then(data =>{
       this.movies = data.results;
@@ -60,7 +62,7 @@ export default {
       this.total = data.total_results;
     });
 
-     fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api}&language=ru-RU`)
+     fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api}&language=en-EN`)
         .then(res=>res.json())
         .then(data=>{
             this.allGenres = data.genres
@@ -69,7 +71,7 @@ export default {
 
   methods:{
     async getNewMovies(pageNum){
-      const res = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=ru-Ru&page=${pageNum}`)
+      const res = await fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-EN&page=${pageNum}`)
       const data = await res.json();
       this.movies = data.results;
     },
@@ -78,21 +80,27 @@ export default {
       this.currentPage = page;
     },
      async getMoviesByGenre(id){
-            const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=ru-RU&page=1&with_genres=${id}`)
+            const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${api}&language=en-EN&page=1&with_genres=${id}`)
             const data = await res.json();
             this.movies = data.results;
             // this.page = data.page;
             this.currentPage = data.page;
             this.total = data.total_results;
             
-        }
+        },
+      async searchMovie(title){
+          const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api}&language=en-EN&query=${title}`)
+          const data = await res.json();
+          this.movies = data.results;
+          this.hidePagination = false;
+            // this.page = data.page;
+     }
   }
 
 }
 </script>
 
 <style scoped> 
-
 /* width */
 ::-webkit-scrollbar {
   width: 16px;

@@ -1,5 +1,7 @@
 <template>
-  <div class="max-w-sm rounded overflow-hidden bg-gray-300 shadow-lg mx-auto my-2">
+  <div class="max-w-sm rounded relative overflow-hidden bg-gray-300 shadow-lg mx-auto my-2">
+    <span :class="ratingColor" 
+    class="absolute rounded-xl top-2 right-2 text-white py-2 px-4 text-lg">{{movie.vote_average}}</span>
   <img v-if="checkPoster" class="w-full" :src="preImg" alt="Sunset in the mountains">
   <img v-else class="w-full" src="http://www.elizabethlawchambers.com/wp-content/uploads/2019/02/Placeholder-500x500.jpg" alt="Sunset in the mountains">
   
@@ -37,6 +39,23 @@ computed:{
             return this.movie.overview
         }
             return this.movie.overview.slice(0, 180) + '...'
+        },
+    ratingColor(){
+        if (this.movie.vote_average > 7.0) {
+            return {
+                'bg-green-500': true
+            }
+        }
+        else if(this.movie.vote_average > 5.0){
+            return {
+                'bg-yellow-500': true
+            }
+        }
+        else{
+            return {
+                'bg-red-500': true
+            }
+        }
         }
     }
 }

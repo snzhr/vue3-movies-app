@@ -1,5 +1,5 @@
 <template>
-<div class="home h-screen">
+<div class="home">
 <the-navbar @find="searchMovie"></the-navbar>
 <div class="content ">
   <div class="flex mt-16 sticky justify-between overflow-y-hidden sm:overflow-x-scroll

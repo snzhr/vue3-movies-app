@@ -1,19 +1,10 @@
-# vue-practice
+## Movies application on Vue.js
 
-## Project setup
-```
-npm install
-```
+#### Frameworks used
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Tailwind CSS
+- Vue 3 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+TMDB API was used for fetching movies.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [demo](https://vue3-movieapp.netlify.app/#/)
